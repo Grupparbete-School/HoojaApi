@@ -1,4 +1,3 @@
-
 using HoojaApi.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +14,9 @@ namespace HoojaApi
             builder.Services.AddDbContext<HoojaApiDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            builder.Services.AddControllers(); //behövs för att controller ska bli synliga
+            builder.Services.AddControllersWithViews().AddNewtonsoftJson();
+
             builder.Services.AddAuthorization();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,7 +25,7 @@ namespace HoojaApi
 
             var app = builder.Build();
 
-            using(var scope = app.Services.CreateScope())
+            using (var scope = app.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<HoojaApiDbContext>();
                 DummyData.DummyInsert(context);
@@ -36,9 +38,18 @@ namespace HoojaApi
             }
 
             app.UseHttpsRedirection();
+            // Add error handling middleware.
+            app.UseExceptionHandler("/error");
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
 
             app.UseAuthorization();
 
+            app.UseRouting();
+
+
+            app.MapControllers(); //viktig för att mappning ska fungera
+
+  
             app.Run();
         }
     }

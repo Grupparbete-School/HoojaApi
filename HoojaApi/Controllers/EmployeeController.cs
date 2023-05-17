@@ -43,7 +43,7 @@ namespace HoojaApi.Controllers
         }
 
         // POST api/<EmployeeController>
-        [HttpPost]
+        [HttpPost("CreateEmployee")]
         public async Task<ActionResult> AddEmployee([FromBody] Employee employee)
         {
             _context.Employees.Add(employee);

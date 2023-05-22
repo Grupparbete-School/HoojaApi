@@ -12,6 +12,21 @@ namespace HoojaApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    AddressId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Street = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CampaignCodes",
                 columns: table => new
                 {
@@ -24,40 +39,6 @@ namespace HoojaApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CampaignCodes", x => x.CampaignCodeId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    SecurityNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Employees",
-                columns: table => new
-                {
-                    EmployeeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    SecurityNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,52 +55,51 @@ namespace HoojaApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "Customers",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FK_CustomerId = table.Column<int>(type: "int", nullable: false)
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    SecurityNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FK_AddressId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
                     table.ForeignKey(
-                        name: "FK_Orders_Customers_FK_CustomerId",
-                        column: x => x.FK_CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
+                        name: "FK_Customers_Addresses_FK_AddressId",
+                        column: x => x.FK_AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "AddressId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Addresses",
+                name: "Employees",
                 columns: table => new
                 {
-                    AddressId = table.Column<int>(type: "int", nullable: false)
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Street = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FK_CustomerId = table.Column<int>(type: "int", nullable: true),
-                    FK_EmployeeId = table.Column<int>(type: "int", nullable: true)
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    SecurityNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FK_AddressId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
+                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Addresses_Customers_FK_CustomerId",
-                        column: x => x.FK_CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId");
-                    table.ForeignKey(
-                        name: "FK_Addresses_Employees_FK_EmployeeId",
-                        column: x => x.FK_EmployeeId,
-                        principalTable: "Employees",
-                        principalColumn: "EmployeeId");
+                        name: "FK_Employees_Addresses_FK_AddressId",
+                        column: x => x.FK_AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "AddressId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,6 +132,47 @@ namespace HoojaApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderComment = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FK_CustomerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_FK_CustomerId",
+                        column: x => x.FK_CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductReviews",
+                columns: table => new
+                {
+                    ProductReviewId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Review = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    FK_ProductId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductReviews", x => x.ProductReviewId);
+                    table.ForeignKey(
+                        name: "FK_ProductReviews_Products_FK_ProductId",
+                        column: x => x.FK_ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderHistory",
                 columns: table => new
                 {
@@ -177,34 +198,15 @@ namespace HoojaApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ProductReviews",
-                columns: table => new
-                {
-                    ProductReviewId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Review = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    FK_ProductId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductReviews", x => x.ProductReviewId);
-                    table.ForeignKey(
-                        name: "FK_ProductReviews_Products_FK_ProductId",
-                        column: x => x.FK_ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId");
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_FK_AddressId",
+                table: "Customers",
+                column: "FK_AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Addresses_FK_CustomerId",
-                table: "Addresses",
-                column: "FK_CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Addresses_FK_EmployeeId",
-                table: "Addresses",
-                column: "FK_EmployeeId");
+                name: "IX_Employees_FK_AddressId",
+                table: "Employees",
+                column: "FK_AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderHistory_FK_OrderId",
@@ -241,16 +243,13 @@ namespace HoojaApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Addresses");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "OrderHistory");
 
             migrationBuilder.DropTable(
                 name: "ProductReviews");
-
-            migrationBuilder.DropTable(
-                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Orders");
@@ -266,6 +265,9 @@ namespace HoojaApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductTypes");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
         }
     }
 }

@@ -26,8 +26,8 @@ namespace HoojaApi.Models
         [DisplayName("Pris")]
         public int Price { get; set; }
 
-        [DisplayName("Antal")]
-        public int Quantity { get; set; }
+        [DisplayName("Antal i lager")]
+        public int QuantityStock { get; set; }
 
         //Relations
         [ForeignKey("ProductTypes")]

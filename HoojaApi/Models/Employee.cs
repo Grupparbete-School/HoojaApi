@@ -40,6 +40,10 @@ namespace HoojaApi.Models
         public string Email { get; set; }
 
         //navigering
-        public ICollection<Address>? Addresses { get; set; }
+        //public ICollection<Address>? Addresses { get; set; }
+
+        [ForeignKey("Addresses")]
+        public int FK_AddressId { get; set; }
+        public virtual Address? Addresses { get; set; }
     }
 }

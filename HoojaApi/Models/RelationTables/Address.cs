@@ -13,24 +13,27 @@ namespace HoojaApi.Models.RelationTables
         [Required]
         [StringLength(50)]
         [DisplayName("Gata")]
-        public string Street { get; set; }
+        public string? Street { get; set; }
 
         [Required]
         [StringLength(50)]
         [DisplayName("Postnummer")]
-        public string PostalCode { get; set; }
+        public string? PostalCode { get; set; }
 
         [Required]
         [StringLength(50)]
         [DisplayName("Stad")]
         public string City { get; set; }
 
-        [ForeignKey("Customers")]
-        public int? FK_CustomerId { get; set; } = null;
-        public Customer? Customers { get; set; }
+        //[ForeignKey("Customers")]
+        //public int? FK_CustomerId { get; set; } = null;
+        //public Customer? Customers { get; set; }
 
-        [ForeignKey("Employees")]
-        public int? FK_EmployeeId { get; set; } = null;
-        public Employee? Employees { get; set; }
+        //[ForeignKey("Employees")]
+        //public int? FK_EmployeeId { get; set; } = null;
+        //public Employee? Employees { get; set; }
+
+        public virtual ICollection<Employee>? Employees { get; set; }
+        public virtual ICollection<Customer>? Customers { get; set; }
     }
 }

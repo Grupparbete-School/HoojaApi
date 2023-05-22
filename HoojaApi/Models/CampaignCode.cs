@@ -8,7 +8,7 @@ namespace HoojaApi.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CampaignCodeId { get; set; }
+        public int? CampaignCodeId { get; set; } = null;
 
         public string? CampaignName { get; set; }
 

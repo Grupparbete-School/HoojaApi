@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HoojaApi.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AddressController : Controller
     {
         private readonly HoojaApiDbContext _context;

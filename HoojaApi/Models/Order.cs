@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,16 +12,17 @@ namespace HoojaApi.Models
 
         [Required]
         [StringLength(50)]
-        [DisplayName("Order")]
-        public string OrderName { get; set; }
+        [DisplayName("Comment")]
+        public string? OrderComment { get; set; } = null;
 
         [Required]
         [DisplayName("Order datum")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
+        [DisplayName("Beräknat leveransdatum")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DeliveryDate { get; set; }
+        public DateTime DeliveryDate { get; set; } = DateTime.Now.AddDays(5);
 
         [ForeignKey("Customers")]
         public int FK_CustomerId { get; set; }

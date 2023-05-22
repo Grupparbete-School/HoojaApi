@@ -9,7 +9,6 @@ namespace HoojaApi.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Range(1000, 1)]
         public int CustomerId { get; set; }
 
         [Required]
@@ -27,22 +26,23 @@ namespace HoojaApi.Models
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
 
-        [Required]
         [StringLength(15)]
         [DisplayName("Telefonnummer")]
-        public string PhoneNumber { get; set; }
-        [Required]
+        public string? PhoneNumber { get; set; }
+
         [StringLength(15)]
         [DisplayName("Personnummer")]
-        public string SecurityNumber { get; set; }
+        public string? SecurityNumber { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Email { get; set; }
-        
-        //Navigering
-        public ICollection<Address>? Addresses { get; set; }
-        public ICollection<Order>? Orders { get; set; }
+
+        [ForeignKey("Addresses")]
+        public int FK_AddressId { get; set; }
+        public virtual Address? Addresses { get; set; }
+        //public ICollection<Address>? Addresses { get; set; }
+        //public ICollection<Order>? Orders { get; set; }
 
     }
 }

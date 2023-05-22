@@ -1,5 +1,7 @@
 ﻿using HoojaApi.Data;
 using HoojaApi.Models;
+using HoojaApi.Models.DTO.OrderDto;
+using HoojaApi.Models.RelationTables;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,13 +42,72 @@ namespace HoojaApi.Controllers
         }
 
         // POST api/<OrderController>
-        [HttpPost]
-        public async Task<ActionResult> AddOrder([FromBody] Order order)
+        //[HttpPost]
+        //public async Task<ActionResult> AddOrder([FromBody] Order order)
+        //{
+        //    _context.Orders.Add(order);
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok(order);
+        //}
+
+        [HttpPost("AddOrder")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> AddOrder([FromBody] OrderPostDto createOrder)
         {
-            _context.Orders.Add(order);
+            var newAddress = new Address
+            {
+                Street = createOrder.Street,
+                PostalCode = createOrder.PostalCode,
+                City = createOrder.City,
+            };
+
+            _context.Addresses.Add(newAddress);
             await _context.SaveChangesAsync();
 
-            return Ok(order);
+            //hämtar senaste id
+            var newAddressId = newAddress.AddressId;
+
+            var newCustomer = new Customer
+            {
+                FirstName = createOrder.FirstName,
+                LastName = createOrder.LastName,
+                Email = createOrder.Email,
+                FK_AddressId = newAddressId,
+
+            };
+
+            _context.Customers.Add(newCustomer);
+            await _context.SaveChangesAsync();
+
+            //hämta senast skapade customer id
+            int newCustomerId = newCustomer.CustomerId;
+
+            var newOrder = new Order
+            {
+                OrderComment = createOrder.OrderComment,
+                FK_CustomerId = newCustomerId,
+            };
+
+            _context.Orders.Add(newOrder);
+            await _context.SaveChangesAsync();
+
+            //hämta senaste id
+            int newOrderId = newOrder.OrderId;
+
+            var newHistory = new OrderHistory
+            {
+                FK_OrderId = newOrderId,
+                FK_ProductId = (int)createOrder.ProductId,
+                Amount = (int)createOrder.Amount,
+            };
+
+            _context.OrderHistorys.Add(newHistory);
+            await _context.SaveChangesAsync();
+
+            return Ok("Order created successfully");
+
         }
 
         // PUT api/<OrderController>/5

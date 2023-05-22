@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoojaApi.Migrations
 {
     [DbContext(typeof(HoojaApiDbContext))]
-    [Migration("20230517105656_createDb")]
-    partial class createDb
+    [Migration("20230522115235_addedAmountProductTable")]
+    partial class addedAmountProductTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace HoojaApi.Migrations
 
             modelBuilder.Entity("HoojaApi.Models.CampaignCode", b =>
                 {
-                    b.Property<int>("CampaignCodeId")
+                    b.Property<int?>("CampaignCodeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CampaignCodeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("CampaignCodeId"));
 
                     b.Property<DateTime>("CampaignEnd")
                         .HasColumnType("datetime2");
@@ -60,6 +60,9 @@ namespace HoojaApi.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("FK_AddressId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -82,6 +85,8 @@ namespace HoojaApi.Migrations
 
                     b.HasKey("CustomerId");
 
+                    b.HasIndex("FK_AddressId");
+
                     b.ToTable("Customers");
                 });
 
@@ -97,6 +102,9 @@ namespace HoojaApi.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("FK_AddressId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -120,6 +128,8 @@ namespace HoojaApi.Migrations
 
                     b.HasKey("EmployeeId");
 
+                    b.HasIndex("FK_AddressId");
+
                     b.ToTable("Employees");
                 });
 
@@ -137,13 +147,13 @@ namespace HoojaApi.Migrations
                     b.Property<int>("FK_CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OrderName")
+                    b.Property<string>("OrderComment")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("OrderId");
 
@@ -159,6 +169,9 @@ namespace HoojaApi.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<int?>("FK_CampaignCodeId")
                         .HasColumnType("int");
@@ -204,12 +217,6 @@ namespace HoojaApi.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("FK_CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FK_EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -221,10 +228,6 @@ namespace HoojaApi.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("AddressId");
-
-                    b.HasIndex("FK_CustomerId");
-
-                    b.HasIndex("FK_EmployeeId");
 
                     b.ToTable("Addresses");
                 });
@@ -292,10 +295,32 @@ namespace HoojaApi.Migrations
                     b.ToTable("ProductTypes");
                 });
 
+            modelBuilder.Entity("HoojaApi.Models.Customer", b =>
+                {
+                    b.HasOne("HoojaApi.Models.RelationTables.Address", "Addresses")
+                        .WithMany("Customers")
+                        .HasForeignKey("FK_AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Addresses");
+                });
+
+            modelBuilder.Entity("HoojaApi.Models.Employee", b =>
+                {
+                    b.HasOne("HoojaApi.Models.RelationTables.Address", "Addresses")
+                        .WithMany("Employees")
+                        .HasForeignKey("FK_AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Addresses");
+                });
+
             modelBuilder.Entity("HoojaApi.Models.Order", b =>
                 {
                     b.HasOne("HoojaApi.Models.Customer", "Customers")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("FK_CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -318,21 +343,6 @@ namespace HoojaApi.Migrations
                     b.Navigation("CampaignCodes");
 
                     b.Navigation("ProductTypes");
-                });
-
-            modelBuilder.Entity("HoojaApi.Models.RelationTables.Address", b =>
-                {
-                    b.HasOne("HoojaApi.Models.Customer", "Customers")
-                        .WithMany("Addresses")
-                        .HasForeignKey("FK_CustomerId");
-
-                    b.HasOne("HoojaApi.Models.Employee", "Employees")
-                        .WithMany("Addresses")
-                        .HasForeignKey("FK_EmployeeId");
-
-                    b.Navigation("Customers");
-
-                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("HoojaApi.Models.RelationTables.OrderHistory", b =>
@@ -368,21 +378,16 @@ namespace HoojaApi.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("HoojaApi.Models.Customer", b =>
-                {
-                    b.Navigation("Addresses");
-
-                    b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("HoojaApi.Models.Employee", b =>
-                {
-                    b.Navigation("Addresses");
-                });
-
             modelBuilder.Entity("HoojaApi.Models.Product", b =>
                 {
                     b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("HoojaApi.Models.RelationTables.Address", b =>
+                {
+                    b.Navigation("Customers");
+
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("HoojaApi.Models.RelationTables.ProductType", b =>

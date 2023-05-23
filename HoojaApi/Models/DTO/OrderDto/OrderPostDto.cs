@@ -1,17 +1,30 @@
-﻿namespace HoojaApi.Models.DTO.OrderDto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HoojaApi.Models.DTO.OrderDto
 {
     public class OrderPostDto
     {
+        [Required]
         public int? ProductId { get; set; }
+
+        [Required]
         public int? Amount { get; set; }
 
-        public string? OrderComment { get; set; } = "no comment";
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Email { get; set; }
+        public string OrderComment { get; set; } = "no comment";
 
-        public string? Street { get; set; }
-        public string? PostalCode { get; set; }
-        public string? City { get; set; }
+        [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+        [Required]
+        public string Email { get; set; }
+
+        [Required]
+        public string Street { get; set; }
+        [Required]
+        public string PostalCode { get; set; }
+        [Required]
+        public string City { get; set; }
     }
 }

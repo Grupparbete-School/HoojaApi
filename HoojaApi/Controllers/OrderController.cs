@@ -56,59 +56,67 @@ namespace HoojaApi.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> AddOrder([FromBody] OrderPostDto createOrder)
         {
-            var newAddress = new Address
+            if (!ModelState.IsValid)
             {
-                Street = createOrder.Street,
-                PostalCode = createOrder.PostalCode,
-                City = createOrder.City,
-            };
+                return BadRequest(ModelState);
+            }
 
-            _context.Addresses.Add(newAddress);
-            await _context.SaveChangesAsync();
-
-            //hämtar senaste id
-            var newAddressId = newAddress.AddressId;
-
-            var newCustomer = new Customer
+            try
             {
-                FirstName = createOrder.FirstName,
-                LastName = createOrder.LastName,
-                Email = createOrder.Email,
-                FK_AddressId = newAddressId,
+                var newAddress = new Address
+                {
+                    Street = createOrder.Street,
+                    PostalCode = createOrder.PostalCode,
+                    City = createOrder.City,
+                };
 
-            };
+                _context.Addresses.Add(newAddress);
+                await _context.SaveChangesAsync();
 
-            _context.Customers.Add(newCustomer);
-            await _context.SaveChangesAsync();
+                var newAddressId = newAddress.AddressId;
 
-            //hämta senast skapade customer id
-            int newCustomerId = newCustomer.CustomerId;
+                var newCustomer = new Customer
+                {
+                    FirstName = createOrder.FirstName,
+                    LastName = createOrder.LastName,
+                    Email = createOrder.Email,
+                    FK_AddressId = newAddressId,
+                };
 
-            var newOrder = new Order
+                _context.Customers.Add(newCustomer);
+                await _context.SaveChangesAsync();
+
+                int newCustomerId = newCustomer.CustomerId;
+
+                var newOrder = new Order
+                {
+                    OrderComment = createOrder.OrderComment,
+                    FK_CustomerId = newCustomerId,
+                };
+
+                _context.Orders.Add(newOrder);
+                await _context.SaveChangesAsync();
+
+                int newOrderId = newOrder.OrderId;
+
+                var newHistory = new OrderHistory
+                {
+                    FK_OrderId = newOrderId,
+                    FK_ProductId = (int)createOrder.ProductId,
+                    Amount = (int)createOrder.Amount,
+                };
+
+                _context.OrderHistorys.Add(newHistory);
+                await _context.SaveChangesAsync();
+
+                return Ok("Order created successfully");
+            }
+            catch (Exception ex)
             {
-                OrderComment = createOrder.OrderComment,
-                FK_CustomerId = newCustomerId,
-            };
-
-            _context.Orders.Add(newOrder);
-            await _context.SaveChangesAsync();
-
-            //hämta senaste id
-            int newOrderId = newOrder.OrderId;
-
-            var newHistory = new OrderHistory
-            {
-                FK_OrderId = newOrderId,
-                FK_ProductId = (int)createOrder.ProductId,
-                Amount = (int)createOrder.Amount,
-            };
-
-            _context.OrderHistorys.Add(newHistory);
-            await _context.SaveChangesAsync();
-
-            return Ok("Order created successfully");
-
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
         }
+
 
         // PUT api/<OrderController>/5
         [HttpPut("{id}")]

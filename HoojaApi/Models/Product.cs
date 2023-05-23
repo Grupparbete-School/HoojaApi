@@ -28,6 +28,7 @@ namespace HoojaApi.Models
 
         [DisplayName("Antal i lager")]
         public int QuantityStock { get; set; }
+        public byte[]? ProductPicture { get; set; }
 
         //Relations
         [ForeignKey("ProductTypes")]

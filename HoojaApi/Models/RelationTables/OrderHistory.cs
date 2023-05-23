@@ -9,6 +9,8 @@ namespace HoojaApi.Models.RelationTables
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderProductId { get; set; }
+        public bool IsActive { get; set; }
+        public bool NotActive { get; set; }
 
         [ForeignKey("Orders")]
         public int FK_OrderId { get; set; }

@@ -1,6 +1,7 @@
 using HoojaApi.Data;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace HoojaApi
 {
     public class Program
@@ -9,8 +10,24 @@ namespace HoojaApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            //Add services to the container.
+            //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            // builder.Services.AddDbContext<HoojaApiDbContext>(options =>
+            //     options.UseSqlServer(connectionString));
+
+            // Retrieve the connection string from the environment variable
+            var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("Connection string 'CONNECTION_STRING' not found.");
+            }
+
+            builder.Services.AddDbContext<HoojaApiDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
+
+
             builder.Services.AddDbContext<HoojaApiDbContext>(options =>
                 options.UseSqlServer(connectionString));
 

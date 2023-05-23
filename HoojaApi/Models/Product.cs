@@ -36,7 +36,7 @@ namespace HoojaApi.Models
         public ProductType? ProductTypes { get; set; }
 
         [ForeignKey("CampaignCodes")]
-        public int? FK_CampaignCodeId { get; set; } = null; //kan vara null
+        public int? FK_CampaignCodeId { get; set; } = null;
         public CampaignCode? CampaignCodes { get; set; }
 
         public ICollection<ProductReview>? Reviews { get; set; }

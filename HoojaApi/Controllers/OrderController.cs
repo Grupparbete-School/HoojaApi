@@ -41,16 +41,6 @@ namespace HoojaApi.Controllers
             return Ok(orders);
         }
 
-        // POST api/<OrderController>
-        //[HttpPost]
-        //public async Task<ActionResult> AddOrder([FromBody] Order order)
-        //{
-        //    _context.Orders.Add(order);
-        //    await _context.SaveChangesAsync();
-
-        //    return Ok(order);
-        //}
-
         [HttpPost("AddOrder")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

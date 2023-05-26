@@ -15,6 +15,9 @@ namespace HoojaApi
             // builder.Services.AddDbContext<HoojaApiDbContext>(options =>
             //     options.UseSqlServer(connectionString));
 
+            //loading the .env file
+            DotNetEnv.Env.Load();
+
             // Retrieve the connection string from the environment variable
             var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
@@ -22,11 +25,6 @@ namespace HoojaApi
             {
                 throw new InvalidOperationException("Connection string 'CONNECTION_STRING' not found.");
             }
-
-            builder.Services.AddDbContext<HoojaApiDbContext>(options =>
-                options.UseSqlServer(connectionString));
-
-
 
             builder.Services.AddDbContext<HoojaApiDbContext>(options =>
                 options.UseSqlServer(connectionString));

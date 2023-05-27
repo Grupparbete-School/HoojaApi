@@ -28,7 +28,9 @@ namespace HoojaApi.Models
 
         [DisplayName("Antal i lager")]
         public int QuantityStock { get; set; }
-        public byte[]? ProductPicture { get; set; }
+
+        //ändrade från byte[] till string.
+        public string? ProductPicture { get; set; }
 
         //Relations
         [ForeignKey("ProductTypes")]

@@ -1,5 +1,6 @@
 ﻿using HoojaApi.Data;
 using HoojaApi.Models;
+using HoojaApi.Models.DTO.ProductDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,9 +43,20 @@ namespace HoojaApi.Controllers
 
         // POST api/<ProductController>
         [HttpPost("Create-Product")]
-        public async Task<ActionResult> AddProduct([FromBody] Product product)
+        public async Task<ActionResult> AddProduct(AddProductDto newProduct)
         {
+            var product = new Product
+            {
+                ProductName = newProduct.ProductName,
+                ProductDescription = newProduct.ProductDescription,
+                Price = newProduct.Price,
+                QuantityStock = newProduct.QuantityStock,
+                ProductPicture = newProduct.ProductPicture,
+                FK_ProductTypeId = newProduct.FK_ProductTypeId,
+            };
+
            _context.Products.Add(product);
+
             await _context.SaveChangesAsync();
 
             return Ok(product);
@@ -52,17 +64,32 @@ namespace HoojaApi.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromBody] Product product)
+        public async Task<ActionResult<Product>> UpdateProduct(int id, [FromBody] ProductPUTDto product)
         {
             if (id != product.ProductId)
             {
                 return BadRequest();
             }
 
-           _context.Entry(product).State = EntityState.Modified;
-           await _context.SaveChangesAsync();
+            var existingProduct = await _context.Products.FindAsync(product.ProductId);
 
-            return Ok(product);
+            if (existingProduct == null)
+            {
+                return NotFound();
+            }
+
+            existingProduct.ProductName = product.ProductName;
+            existingProduct.ProductDescription = product.ProductDescription;
+            existingProduct.Price = product.Price;
+            existingProduct.QuantityStock = product.QuantityStock;
+            existingProduct.ProductPicture = product.ProductPicture;
+            existingProduct.FK_ProductTypeId = product.ProductTypeId;
+
+            var check = _context.Products.Update(existingProduct);
+
+            var check2 = await _context.SaveChangesAsync();
+
+            return Ok(existingProduct);
         }
 
         // DELETE api/<ProductController>/5
@@ -79,6 +106,18 @@ namespace HoojaApi.Controllers
             await _context.SaveChangesAsync();
 
             return Ok($"Product with {id} deleted successfully");
+        }
+
+        [HttpGet("GetProductType")]
+        public async Task<ActionResult> GetProductType()
+        {
+            var productType = await _context.ProductTypes.ToListAsync();
+            if (productType == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(productType);
         }
     }
 }

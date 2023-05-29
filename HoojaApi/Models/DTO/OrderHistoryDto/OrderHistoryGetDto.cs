@@ -18,6 +18,7 @@ namespace HoojaApi.Models.DTO.OrderHistoryDto
         public string? ProductDescription { get; set; }
         public int? Price {get; set; }
         public int? QuantityStock { get; set; }
+        public int? Amount { get; set; }
 
         //Produkt grupp
         public int? ProductTypeId { get; set; }

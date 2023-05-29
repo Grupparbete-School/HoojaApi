@@ -30,7 +30,7 @@ namespace HoojaApi.Controllers
                 .Include(o => o.Products.CampaignCodes)
                 .Include(o => o.Orders.Customers)
                 .Include(o => o.Orders.Customers.Addresses)
-                .Select( o => new OrderHistoryGetDto
+                .Select(o => new OrderHistoryGetDto
                 {
                     OrderId = o.Orders.OrderId,
                     OrderComment = o.Orders.OrderComment,
@@ -41,6 +41,7 @@ namespace HoojaApi.Controllers
                     ProductDescription = o.Products.ProductDescription,
                     Price = o.Products.Price,
                     QuantityStock = o.Products.QuantityStock,
+                    Amount = o.Orders.Amount,
                     ProductTypeId = o.Products.ProductTypes.ProductTypeId,
                     ProductTypeName = o.Products.ProductTypes.ProductTypeName,
                     CampaignCodeId = (int)o.Products.CampaignCodes.CampaignCodeId,
@@ -62,7 +63,48 @@ namespace HoojaApi.Controllers
             return Ok(orderHistory);
         }
 
-        
+        [HttpGet("GetAllOrderHistoryById{id}")]
+        public async Task<ActionResult<IEnumerable<OrderHistoryGetDto>>> GetAllOrderHistoryById(int id)
+        {
+            var orderHistory = await _context.OrderHistorys
+               .Include(o => o.Orders)
+               .Include(o => o.Products)
+               .Include(o => o.Products.ProductTypes)
+               .Include(o => o.Products.CampaignCodes)
+               .Include(o => o.Orders.Customers)
+               .Include(o => o.Orders.Customers.Addresses)
+               .Where(o => o.FK_OrderId == id)
+               .Select(o => new OrderHistoryGetDto
+               {
+                   OrderId = o.Orders.OrderId,
+                   OrderComment = o.Orders.OrderComment,
+                   OrderDate = o.Orders.OrderDate,
+                   DeliveryDate = o.Orders.DeliveryDate,
+                   ProductId = o.Products.ProductId,
+                   ProductName = o.Products.ProductName,
+                   ProductDescription = o.Products.ProductDescription,
+                   Price = o.Products.Price,
+                   QuantityStock = o.Products.QuantityStock,
+                   Amount = o.Orders.Amount,
+                   ProductTypeId = o.Products.ProductTypes.ProductTypeId,
+                   ProductTypeName = o.Products.ProductTypes.ProductTypeName,
+                   CampaignCodeId = (int)o.Products.CampaignCodes.CampaignCodeId,
+                   CampaignName = o.Products.CampaignCodes.CampaignName,
+                   CustomerId = o.Orders.Customers.CustomerId,
+                   FirstName = o.Orders.Customers.FirstName,
+                   LastName = o.Orders.Customers.LastName,
+                   FullName = o.Orders.Customers.FullName,
+                   PhoneNumber = o.Orders.Customers.PhoneNumber,
+                   SecurityNumber = o.Orders.Customers.SecurityNumber,
+                   Email = o.Orders.Customers.Email,
+                   AddressId = o.Orders.Customers.Addresses.AddressId,
+                   Street = o.Orders.Customers.Addresses.Street,
+                   PostalCode = o.Orders.Customers.Addresses.PostalCode,
+                   City = o.Orders.Customers.Addresses.City,
 
+               }).ToListAsync();
+
+            return Ok(orderHistory);
+        }
     }
 }

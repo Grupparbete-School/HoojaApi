@@ -29,6 +29,7 @@ namespace HoojaApi
             builder.Services.AddDbContext<HoojaApiDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+
             builder.Services.AddControllers(); //behövs för att controller ska bli synliga
             builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 

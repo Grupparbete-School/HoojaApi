@@ -24,6 +24,9 @@ namespace HoojaApi.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DeliveryDate { get; set; } = DateTime.Now.AddDays(5);
 
+        [DisplayName("Antal")]
+        public int? Amount { get; set; }
+
         [ForeignKey("Customers")]
         public int FK_CustomerId { get; set; }
         public Customer? Customers { get; set; }

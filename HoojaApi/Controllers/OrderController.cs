@@ -82,6 +82,7 @@ namespace HoojaApi.Controllers
                 {
                     OrderComment = createOrder.OrderComment,
                     FK_CustomerId = newCustomerId,
+                    Amount = createOrder.Amount,
                 };
 
                 _context.Orders.Add(newOrder);
@@ -93,7 +94,6 @@ namespace HoojaApi.Controllers
                 {
                     FK_OrderId = newOrderId,
                     FK_ProductId = (int)createOrder.ProductId,
-                    Amount = (int)createOrder.Amount,
                 };
 
                 _context.OrderHistorys.Add(newHistory);

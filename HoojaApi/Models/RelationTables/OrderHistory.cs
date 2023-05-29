@@ -19,8 +19,5 @@ namespace HoojaApi.Models.RelationTables
         [ForeignKey("Products")]
         public int FK_ProductId { get; set; }
         public Product? Products { get; set; }
-
-        [DisplayName("Antal köpta varor")]
-        public int Amount { get; set; }
     }
 }

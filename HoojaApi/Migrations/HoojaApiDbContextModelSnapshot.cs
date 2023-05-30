@@ -151,6 +151,9 @@ namespace HoojaApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderProductId"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<int>("FK_OrderId")
                         .HasColumnType("int");
 

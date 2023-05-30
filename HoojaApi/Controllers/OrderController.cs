@@ -65,7 +65,7 @@ namespace HoojaApi.Controllers
 
                 var newAddressId = newAddress.AddressId;
 
-                var newCustomer = new Customer
+                var newCustomer = new User
                 {
                     FirstName = createOrder.FirstName,
                     LastName = createOrder.LastName,
@@ -73,16 +73,15 @@ namespace HoojaApi.Controllers
                     FK_AddressId = newAddressId,
                 };
 
-                _context.Customers.Add(newCustomer);
+                _context.Users.Add(newCustomer);
                 await _context.SaveChangesAsync();
 
-                int newCustomerId = newCustomer.CustomerId;
+                int newCustomerId = newCustomer.Id;
 
                 var newOrder = new Order
                 {
                     OrderComment = createOrder.OrderComment,
                     FK_CustomerId = newCustomerId,
-                    Amount = createOrder.Amount,
                 };
 
                 _context.Orders.Add(newOrder);

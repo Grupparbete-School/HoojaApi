@@ -1,4 +1,4 @@
-﻿ using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,11 +24,8 @@ namespace HoojaApi.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DeliveryDate { get; set; } = DateTime.Now.AddDays(5);
 
-        [DisplayName("Antal")]
-        public int? Amount { get; set; }
-
-        [ForeignKey("Customers")]
+        [ForeignKey("Users")]
         public int FK_CustomerId { get; set; }
-        public Customer? Customers { get; set; }
+        public User? Users { get; set; }
     }
 }

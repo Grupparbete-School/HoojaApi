@@ -1,6 +1,8 @@
 ﻿using HoojaApi.Data;
 using HoojaApi.Models;
 using HoojaApi.Models.DTO.ProductDto;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,7 @@ namespace HoojaApi.Controllers
         [HttpGet("GetAllProduct")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProcuct()
         {
            var products = await _context.Products.ToListAsync();

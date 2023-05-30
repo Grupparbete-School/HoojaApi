@@ -1,6 +1,11 @@
+using HoojaApi.CustomIdentity;
 using HoojaApi.Data;
+using HoojaApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace HoojaApi
 {
@@ -32,6 +37,19 @@ namespace HoojaApi
 
             builder.Services.AddControllers(); //behövs för att controller ska bli synliga
             builder.Services.AddControllersWithViews().AddNewtonsoftJson();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidateIssuer = true,
+                        ValidIssuer = Environment.GetEnvironmentVariable("ISSUER"),
+                        ValidAudience = Environment.GetEnvironmentVariable("AUDIENCE"),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET_KEY")))
+                    };
+                });
 
             builder.Services.AddAuthorization();
 
@@ -39,13 +57,25 @@ namespace HoojaApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<HoojaApiDbContext>()
+                .AddUserManager<CustomUserManager>()
+                .AddRoleManager<CustomRoleManager>()
+                .AddDefaultTokenProviders();
+
             var app = builder.Build();
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<HoojaApiDbContext>();
-                DummyData.DummyInsert(context);
-            }
+            DummyData.DummyInsert(app);
+
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var context = scope.ServiceProvider.GetRequiredService<HoojaApiDbContext>();
+            //    DummyData.DummyInsert(context);
+            //}
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -58,10 +88,9 @@ namespace HoojaApi
             app.UseExceptionHandler("/error");
             app.UseStatusCodePagesWithReExecute("/error/{0}");
 
-            app.UseAuthorization();
-
             app.UseRouting();
 
+            app.UseAuthorization();
 
             app.MapControllers(); //viktig för att mappning ska fungera
 

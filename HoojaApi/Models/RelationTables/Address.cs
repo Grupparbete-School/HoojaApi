@@ -33,7 +33,7 @@ namespace HoojaApi.Models.RelationTables
         //public int? FK_EmployeeId { get; set; } = null;
         //public Employee? Employees { get; set; }
 
-        public virtual ICollection<Employee>? Employees { get; set; }
-        public virtual ICollection<Customer>? Customers { get; set; }
+        public virtual ICollection<User>? Users { get; set; }
+        //public virtual ICollection<Customer>? Customers { get; set; }
     }
 }

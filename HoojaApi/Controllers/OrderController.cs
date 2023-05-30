@@ -41,6 +41,7 @@ namespace HoojaApi.Controllers
             return Ok(orders);
         }
 
+        //För kunder som inte är registrerade
         [HttpPost("AddOrder")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

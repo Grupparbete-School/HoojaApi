@@ -74,6 +74,7 @@ namespace HoojaApi.Controllers
                .Include(o => o.Orders.Customers)
                .Include(o => o.Orders.Customers.Addresses)
                .Where(o => o.FK_OrderId == id)
+               .OrderBy(o => o.Orders.OrderDate)
                .Select(o => new OrderHistoryGetDto
                {
                    OrderId = o.Orders.OrderId,

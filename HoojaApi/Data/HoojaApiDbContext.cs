@@ -1,17 +1,17 @@
 ﻿using HoojaApi.Models;
 using HoojaApi.Models.RelationTables;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HoojaApi.Data
 {
-    public class HoojaApiDbContext : DbContext
+    public class HoojaApiDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public HoojaApiDbContext(DbContextOptions<HoojaApiDbContext> options) : base(options)
         {
         }
-
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<CampaignCode> CampaignCodes { get; set; }

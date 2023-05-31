@@ -10,6 +10,7 @@ namespace HoojaApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? CampaignCodeId { get; set; } = null;
 
+        [StringLength(60)]
         public string? CampaignName { get; set; }
 
         [Required]
@@ -19,6 +20,10 @@ namespace HoojaApi.Models
         [Required]
         [DisplayName("Kampanj slut")]
         public DateTime CampaignEnd  { get; set; }
+
+        [Required]
+        [DisplayName("Procent")]
+        public decimal DiscountPercentage { get; set; }
 
         public ICollection<Product>? Products { get; set; }
     }

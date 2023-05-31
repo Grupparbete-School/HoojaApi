@@ -34,10 +34,14 @@ namespace HoojaApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CampaignName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<DateTime>("CampaignStart")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("DiscountPercentage")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("CampaignCodeId");
 

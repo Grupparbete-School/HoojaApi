@@ -7,9 +7,6 @@ namespace HoojaApi.Models.DTO.OrderDto
         [Required]
         public int? ProductId { get; set; }
 
-        [Required]
-        public int? Amount { get; set; }
-
         public string OrderComment { get; set; } = "no comment";
 
         [Required]

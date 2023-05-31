@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HoojaApi.Migrations
 {
     /// <inheritdoc />
-    public partial class firstDb : Migration
+    public partial class createDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

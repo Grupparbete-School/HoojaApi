@@ -87,6 +87,32 @@ namespace HoojaApi.Data
                     };
 
                     check = await userManager.CreateAsync(newCustomer, "customerMaX33!");
+                    
+                    var newCustomer2 = new User()
+                    {
+                        FirstName = "Mårdhund",
+                        LastName = "Hooja",
+                        FK_AddressId = 2,
+                        UserName = "Mårdhund",
+                        Email = "mårdhund@gmail.com",
+                        SecurityNumber = "940414",
+                        EmailConfirmed = true
+                    };
+
+                    check = await userManager.CreateAsync(newCustomer2, "customerMaX33!");
+                    
+                    var newCustomer3 = new User()
+                    {
+                        FirstName = "Hooja",
+                        LastName = "Mårdhund",
+                        FK_AddressId = 2,
+                        UserName = "hooja",
+                        Email = "hooja@gmail.com",
+                        SecurityNumber = "940414",
+                        EmailConfirmed = true
+                    };
+
+                    check = await userManager.CreateAsync(newCustomer3, "customerMaX33!");
 
                     await userManager.UpdateSecurityStampAsync(newAdmin);
                     await userManager.AddToRoleAsync(newAdmin, "Admin");
@@ -102,12 +128,12 @@ namespace HoojaApi.Data
                 {
                     var productTypes = new ProductType[]
                     {
-                    new ProductType { ProductTypeName = "Electronics" },
-                    new ProductType { ProductTypeName = "Clothing" },
-                    new ProductType { ProductTypeName = "Home Appliances" },
-                    new ProductType { ProductTypeName = "Books" },
-                    new ProductType { ProductTypeName = "Beauty Products" }
-                    };
+                    new ProductType { ProductTypeName = "Hair Care" },
+                    new ProductType { ProductTypeName = "Beauty Products" },
+                    new ProductType { ProductTypeName = "Perfume" },
+                    new ProductType { ProductTypeName = "Makeup" },
+                    new ProductType { ProductTypeName = "Skin Care" },
+                };
 
                     context.ProductTypes.AddRange(productTypes);
                     context.SaveChanges();
@@ -117,63 +143,81 @@ namespace HoojaApi.Data
                 {
                     var products = new Product[]
                     {
-                    new Product { ProductName = "iPhone 12 Pro", ProductDescription = "The latest flagship smartphone from Apple.", Price = 9999, QuantityStock = 10, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Stylish T-Shirt", ProductDescription = "Comfortable and fashionable clothing item.", Price = 299, QuantityStock = 20, FK_ProductTypeId = 2, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Kitchen Mixer", ProductDescription = "Powerful appliance for mixing ingredients in the kitchen.", Price = 599, QuantityStock = 5, FK_ProductTypeId = 3, FK_CampaignCodeId = null },
-                    new Product { ProductName = "The Great Gatsby", ProductDescription = "Classic novel by F. Scott Fitzgerald.", Price = 99, QuantityStock = 15, FK_ProductTypeId = 4, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Organic Face Cream", ProductDescription = "Natural beauty product for nourishing the skin.", Price = 199, QuantityStock = 12, FK_ProductTypeId = 5, FK_CampaignCodeId = null }
+                    new Product { ProductName = "Shampoo", ProductDescription = "Cleanses and nourishes hair.", Price = 49, QuantityStock = 20, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
+                    new Product { ProductName = "Conditioner", ProductDescription = "Detangles and softens hair.", Price = 39, QuantityStock = 15, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
+                    new Product { ProductName = "Hair Serum", ProductDescription = "Adds shine and controls frizz.", Price = 29, QuantityStock = 30, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
+                    new Product { ProductName = "Hair Mask", ProductDescription = "Deeply conditions and repairs hair.", Price = 59, QuantityStock = 10, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
+                    new Product { ProductName = "Hair Oil", ProductDescription = "Nourishes and strengthens hair.", Price = 34, QuantityStock = 25, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
+                    new Product { ProductName = "Perfume", ProductDescription = "Elegant fragrance for men and women.", Price = 79, QuantityStock = 8, FK_ProductTypeId = 3, FK_CampaignCodeId = null },
+                    new Product { ProductName = "Makeup Set", ProductDescription = "Complete makeup kit for a flawless look.", Price = 149, QuantityStock = 5, FK_ProductTypeId = 4, FK_CampaignCodeId = null },
+                    new Product { ProductName = "Moisturizer", ProductDescription = "Hydrates and nourishes the skin.", Price = 39, QuantityStock = 12, FK_ProductTypeId = 5, FK_CampaignCodeId = null },
+                    new Product { ProductName = "Facial Cleanser", ProductDescription = "Gently removes impurities from the skin.", Price = 29, QuantityStock = 18, FK_ProductTypeId = 5, FK_CampaignCodeId = null }
                     };
 
                     context.Products.AddRange(products);
                     context.SaveChanges();
                 }
 
-                //if (!context.Orders.Any())
-                //{
-                //    var orders = new Order[]
-                //    {
-                //        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(7), FK_CustomerId = 1 },
-                //        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(5), FK_CustomerId = 2 },
-                //        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(3), FK_CustomerId = 3 },
-                //        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(4), FK_CustomerId = 4 },
-                //        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(6), FK_CustomerId = 5 },
-                //        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(6), FK_CustomerId = 6 }
-                //    };
 
-                //    context.Orders.AddRange(orders);
-                //    context.SaveChanges();
-                //}
+
+                if (!context.Orders.Any())
+                {
+                    var orders = new Order[]
+                    {
+                        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(7), FK_CustomerId = 3 },
+                        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(5), FK_CustomerId = 2 },
+                        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(3), FK_CustomerId = 3 },
+                        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(4), FK_CustomerId = 4 },
+                        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(6), FK_CustomerId = 4 },
+                        new Order { OrderComment = "Order comment", OrderDate = DateTime.Now, DeliveryDate = DateTime.Now.AddDays(6), FK_CustomerId = 2 }
+                    };
+
+                    context.Orders.AddRange(orders);
+                    context.SaveChanges();
+                }
 
                 if (!context.ProductReviews.Any())
                 {
                     var reviews = new ProductReview[]
                     {
-                    new ProductReview { Review = "Amazing phone!", FK_ProductId = 1 },
-                    new ProductReview { Review = "Excellent camera quality.", FK_ProductId = 1 },
-                    new ProductReview { Review = "Great value for the price.", FK_ProductId = 2 },
-                    new ProductReview { Review = "Impressive gaming performance.", FK_ProductId = 3 },
-                    new ProductReview { Review = "Sleek design and powerful performance.", FK_ProductId = 4 },
-                    new ProductReview { Review = "Outstanding image quality.", FK_ProductId = 5 }
+                        new ProductReview { Review = "Cleanses hair thoroughly. Highly recommended!", FK_ProductId = 1 },
+                        new ProductReview { Review = "Leaves hair soft and manageable. Love it!", FK_ProductId = 1 },
+                        new ProductReview { Review = "Provides excellent shine and controls frizz.", FK_ProductId = 3 },
+                        new ProductReview { Review = "Deeply conditions and repairs damaged hair.", FK_ProductId = 4 },
+                        new ProductReview { Review = "Nourishes and strengthens hair. Works wonders!", FK_ProductId = 5 },
+                        new ProductReview { Review = "Delivers a captivating fragrance. Absolutely love it!", FK_ProductId = 6 },
+                        new ProductReview { Review = "Great variety of makeup products in the set. Highly recommend.", FK_ProductId = 7 },
+                        new ProductReview { Review = "Keeps skin moisturized and hydrated. Perfect for daily use.", FK_ProductId = 9 },
+                        new ProductReview { Review = "Gently cleanses the skin without drying it out.", FK_ProductId = 9 }
                     };
 
                     context.ProductReviews.AddRange(reviews);
                     context.SaveChanges();
                 }
 
-                //if (!context.OrderHistorys.Any())
-                //{
-                //    var orderHistorys = new OrderHistory[]
-                //    {
-                //        new OrderHistory { FK_OrderId = 1, FK_ProductId = 1 },
-                //        new OrderHistory { FK_OrderId = 2, FK_ProductId = 2 },
-                //        new OrderHistory { FK_OrderId = 3, FK_ProductId = 3 },
-                //        new OrderHistory { FK_OrderId = 4, FK_ProductId = 4 },
-                //        new OrderHistory { FK_OrderId = 5, FK_ProductId = 5 }
-                //    };
 
-                //    context.OrderHistorys.AddRange(orderHistorys);
-                //    context.SaveChanges();
-                //}
+                if (!context.OrderHistorys.Any())
+                {
+                    var orderHistorys = new OrderHistory[]
+                    {
+                        new OrderHistory { FK_OrderId = 1, FK_ProductId = 1 , Amount = 5},
+                        new OrderHistory { FK_OrderId = 1, FK_ProductId = 3 , Amount = 3},
+                        new OrderHistory { FK_OrderId = 1, FK_ProductId = 4 , Amount = 1},
+                        new OrderHistory { FK_OrderId = 2, FK_ProductId = 4 , Amount = 19},
+                        new OrderHistory { FK_OrderId = 2, FK_ProductId = 5 , Amount = 6},
+                        new OrderHistory { FK_OrderId = 2, FK_ProductId = 6 , Amount = 8},
+                        new OrderHistory { FK_OrderId = 3, FK_ProductId = 3 , Amount = 45},
+                        new OrderHistory { FK_OrderId = 4, FK_ProductId = 9 , Amount = 900},
+                        new OrderHistory { FK_OrderId = 4, FK_ProductId = 8 , Amount = 55},
+                        new OrderHistory { FK_OrderId = 4, FK_ProductId = 7 , Amount = 3},
+                        new OrderHistory { FK_OrderId = 5, FK_ProductId = 2 , Amount = 5},
+                        new OrderHistory { FK_OrderId = 5, FK_ProductId = 9 , Amount = 5},
+                        new OrderHistory { FK_OrderId = 5, FK_ProductId = 1 , Amount = 5},
+                    };
+
+                    context.OrderHistorys.AddRange(orderHistorys);
+                    context.SaveChanges();
+                }
             }
 
 

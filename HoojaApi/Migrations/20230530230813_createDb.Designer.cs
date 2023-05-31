@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoojaApi.Migrations
 {
     [DbContext(typeof(HoojaApiDbContext))]
-    [Migration("20230530223853_firstDb")]
-    partial class firstDb
+    [Migration("20230530230813_createDb")]
+    partial class createDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

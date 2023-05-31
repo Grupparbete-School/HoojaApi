@@ -14,5 +14,11 @@
         public string? ProductPicture { get; set; }
 
         public int ProductTypeId { get; set; }
+        
+        public string? CampaignName { get; set; }
+
+        public int? FK_CampaignCodeId { get; set; }
+
+        public bool? IsActive { get; set; }    
     }
 }

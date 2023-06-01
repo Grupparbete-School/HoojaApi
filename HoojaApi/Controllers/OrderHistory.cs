@@ -10,6 +10,7 @@ namespace HoojaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)] //Gömmer apiEndpoint från swagger
     public class OrderHistoryController : Controller
     {
         private readonly HoojaApiDbContext _context;

@@ -39,7 +39,7 @@ namespace HoojaApi.Controllers
 
             if (product == null)
             {
-                return NotFound($"No employee with id: {id} found.");
+                return NotFound($"No product with id: {id} found.");
             }
             return Ok(product);
         }

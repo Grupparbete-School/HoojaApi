@@ -10,7 +10,7 @@ namespace HoojaApi.Models.RelationTables
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductReviewId { get; set; }
 
-        [DisplayName("Recension")]
+        [DisplayName("Review")]
         [StringLength(300)]
         public string? Review { get; set; }
 

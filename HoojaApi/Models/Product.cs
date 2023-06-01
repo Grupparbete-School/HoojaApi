@@ -14,19 +14,19 @@ namespace HoojaApi.Models
 
         [Required]
         [StringLength(50)]
-        [DisplayName("Produkt")]
+        [DisplayName("Product")]
         public string ProductName { get; set; }
 
         [Required]
         [StringLength(300)]
-        [DisplayName("Beskrivning")]
+        [DisplayName("Description")]
         public string ProductDescription { get; set; }
 
         [Required]
-        [DisplayName("Pris")]
+        [DisplayName("Price")]
         public int Price { get; set; }
 
-        [DisplayName("Antal i lager")]
+        [DisplayName("Qty in stock")]
         public int QuantityStock { get; set; }
 
         //ändrade från byte[] till string.

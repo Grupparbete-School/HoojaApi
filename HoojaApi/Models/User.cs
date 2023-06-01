@@ -10,19 +10,19 @@ namespace HoojaApi.Models
     {
         [Required]
         [StringLength(50)]
-        [DisplayName("Förnamn")]
+        [DisplayName("First name")]
         public string FirstName { get; set; }
 
         [Required]
         [StringLength(50)]
-        [DisplayName("Efternamn")]
+        [DisplayName("Last name")]
         public string LastName { get; set; }
-        [DisplayName("Anställd")]
+        [DisplayName("Employee")]
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
         [Required]
         [StringLength(15)]
-        [DisplayName("Personnummer")]
+        [DisplayName("Security number")]
         public string SecurityNumber { get; set; }
         [ForeignKey("Addresses")]
         public int FK_AddressId { get; set; }

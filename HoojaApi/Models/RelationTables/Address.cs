@@ -12,17 +12,17 @@ namespace HoojaApi.Models.RelationTables
 
         [Required]
         [StringLength(50)]
-        [DisplayName("Gata")]
+        [DisplayName("Street")]
         public string? Street { get; set; }
 
         [Required]
         [StringLength(50)]
-        [DisplayName("Postnummer")]
+        [DisplayName("Postal code")]
         public string? PostalCode { get; set; }
 
         [Required]
         [StringLength(50)]
-        [DisplayName("Stad")]
+        [DisplayName("City")]
         public string City { get; set; }
 
         //[ForeignKey("Customers")]

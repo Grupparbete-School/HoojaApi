@@ -14,11 +14,11 @@ namespace HoojaApi.Models
         public string? CampaignName { get; set; }
 
         [Required]
-        [DisplayName("Kampanj start")]
+        [DisplayName("Campaign start")]
         public DateTime CampaignStart { get; set; }
         
         [Required]
-        [DisplayName("Kampanj slut")]
+        [DisplayName("Campaign end")]
         public DateTime CampaignEnd  { get; set; }
 
         [Required]

@@ -1,4 +1,4 @@
-using HoojaApi.CustomIdentity;
+ï»¿using HoojaApi.CustomIdentity;
 using HoojaApi.Data;
 using HoojaApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using HoojaApi.Controllers;
 
 namespace HoojaApi
 {
@@ -35,7 +36,7 @@ namespace HoojaApi
                 options.UseSqlServer(connectionString));
 
 
-            builder.Services.AddControllers(); //behövs för att controller ska bli synliga
+            builder.Services.AddControllers(); //behï¿½vs fï¿½r att controller ska bli synliga
             builder.Services.AddControllersWithViews().AddNewtonsoftJson();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -92,7 +93,7 @@ namespace HoojaApi
 
             app.UseAuthorization();
 
-            app.MapControllers(); //viktig för att mappning ska fungera
+            app.MapControllers(); //viktig fï¿½r att mappning ska fungera
 
   
             app.Run();

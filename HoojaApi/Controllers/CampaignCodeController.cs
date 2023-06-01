@@ -40,7 +40,7 @@ namespace HoojaApi.Controllers
         }
 
         // POST api/<CampaignCodeController>
-        [HttpPost]
+        [HttpPost("AddCampaign")]
         public async Task<ActionResult> AddCampaignCode([FromBody] CampaignCode campaignCode)
         {
             _context.CampaignCodes.Add(campaignCode);

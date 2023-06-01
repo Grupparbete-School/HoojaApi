@@ -82,7 +82,7 @@ namespace HoojaApi.Data
                         FK_AddressId = 2,
                         UserName = "Customer",
                         Email = "customer@gmail.com",
-                        SecurityNumber = "940414",
+                        SecurityNumber = "740414",
                         EmailConfirmed = true
                     };
 
@@ -180,15 +180,16 @@ namespace HoojaApi.Data
                 {
                     var reviews = new ProductReview[]
                     {
-                        new ProductReview { Review = "Cleanses hair thoroughly. Highly recommended!", FK_ProductId = 1 },
-                        new ProductReview { Review = "Leaves hair soft and manageable. Love it!", FK_ProductId = 1 },
-                        new ProductReview { Review = "Provides excellent shine and controls frizz.", FK_ProductId = 3 },
-                        new ProductReview { Review = "Deeply conditions and repairs damaged hair.", FK_ProductId = 4 },
-                        new ProductReview { Review = "Nourishes and strengthens hair. Works wonders!", FK_ProductId = 5 },
-                        new ProductReview { Review = "Delivers a captivating fragrance. Absolutely love it!", FK_ProductId = 6 },
-                        new ProductReview { Review = "Great variety of makeup products in the set. Highly recommend.", FK_ProductId = 7 },
-                        new ProductReview { Review = "Keeps skin moisturized and hydrated. Perfect for daily use.", FK_ProductId = 9 },
-                        new ProductReview { Review = "Gently cleanses the skin without drying it out.", FK_ProductId = 9 }
+                       new ProductReview { Review = "Cleanses hair thoroughly. Highly recommended!", FK_ProductId = 1, Rating = 3, CustomerName = "Emma", ReviewOfDate = new DateTime(2023, 1, 1) },
+                       new ProductReview { Review = "Leaves hair soft and manageable. Love it!", FK_ProductId = 1, Rating = 1, CustomerName = "Oskar", ReviewOfDate = new DateTime(2023, 2, 15) },
+                       new ProductReview { Review = "Provides excellent shine and controls frizz.", FK_ProductId = 3, Rating = 2, CustomerName = "Malin", ReviewOfDate = new DateTime(2023, 3, 10) },
+                       new ProductReview { Review = "Deeply conditions and repairs damaged hair.", FK_ProductId = 4, Rating = 2, CustomerName = "Madde", ReviewOfDate = new DateTime(2023, 4, 5) },
+                       new ProductReview { Review = "Nourishes and strengthens hair. Works wonders!", FK_ProductId = 5, Rating = 5, CustomerName = "Aldor", ReviewOfDate = new DateTime(2023, 5, 20) },
+                       new ProductReview { Review = "Delivers a captivating fragrance. Absolutely love it!", FK_ProductId = 6, Rating = 5, CustomerName = "Mårdhund", ReviewOfDate = new DateTime(2023, 6, 30) },
+                       new ProductReview { Review = "Great variety of makeup products in the set. Highly recommend.", FK_ProductId = 7, Rating = 3, CustomerName = "Hooja", ReviewOfDate = new DateTime(2023, 7, 12) },
+                       new ProductReview { Review = "Keeps skin moisturized and hydrated. Perfect for daily use.", FK_ProductId = 9, Rating = 4, CustomerName = "Sven", ReviewOfDate = new DateTime(2023, 8, 25) },
+                       new ProductReview { Review = "Gently cleanses the skin without drying it out.", FK_ProductId = 9, Rating = 4, CustomerName = "Lisa", ReviewOfDate = new DateTime(2023, 9, 8) }
+
                     };
 
                     context.ProductReviews.AddRange(reviews);

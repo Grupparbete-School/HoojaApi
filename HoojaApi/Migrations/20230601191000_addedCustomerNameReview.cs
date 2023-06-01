@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HoojaApi.Migrations
 {
     /// <inheritdoc />
-    public partial class createDb : Migration
+    public partial class addedCustomerNameReview : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,9 +47,10 @@ namespace HoojaApi.Migrations
                 {
                     CampaignCodeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CampaignName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CampaignName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
                     CampaignStart = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CampaignEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CampaignEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DiscountPercentage = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -270,6 +271,8 @@ namespace HoojaApi.Migrations
                     ProductReviewId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Review = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    CustomerName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     FK_ProductId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

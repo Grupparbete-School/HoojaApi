@@ -23,6 +23,7 @@ namespace HoojaApi.Models
 
         [Required]
         [DisplayName("Procent")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal DiscountPercentage { get; set; }
 
         public ICollection<Product>? Products { get; set; }

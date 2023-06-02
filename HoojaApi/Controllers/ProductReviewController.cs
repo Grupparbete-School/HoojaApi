@@ -51,7 +51,7 @@ namespace HoojaApi.Controllers
 
         // GET api/<ProductReviewController>/5
         //Söker review efter produktID för det kan finnas flera review för samma produkt
-        [HttpGet("GetAllReviews/{id}")]
+        [HttpGet("GetAllReviews/ByProductId/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -62,6 +62,45 @@ namespace HoojaApi.Controllers
                 var productReviews = await _context.ProductReviews
                     .Include(pr => pr.Products)
                     .Where(pr => pr.FK_ProductId == id)
+                    .Select(pr => new ProductReviewGetDto
+                    {
+                        ReviewId = pr.ProductReviewId,
+                        Review = pr.Review,
+                        Rating = pr.Rating,
+                        FK_ProductId = pr.FK_ProductId,
+                        ProductName = pr.Products.ProductName,
+                        CustomerName = pr.CustomerName,
+                        ReviewOfDate = pr.ReviewOfDate,
+                    })
+                    .ToListAsync();
+
+                if (productReviews.Count == 0)
+                {
+                    return NotFound($"No product with id: {id} found. You need to create a review.");
+                }
+
+                return Ok(productReviews);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as per your application's error handling strategy
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving the reviews");
+            }
+        }
+
+        // GET api/<ProductReviewController>/5
+        //Söker review efter reviewID för att hitta specific review
+        [HttpGet("GetAllReviews/ByReviewId/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ProductReviewGetDto>>> GetAllReviewsByReviewId(int id)
+        {
+            try
+            {
+                var productReviews = await _context.ProductReviews
+                    .Include(pr => pr.Products)
+                    .Where(pr => pr.ProductReviewId == id)
                     .Select(pr => new ProductReviewGetDto
                     {
                         ReviewId = pr.ProductReviewId,

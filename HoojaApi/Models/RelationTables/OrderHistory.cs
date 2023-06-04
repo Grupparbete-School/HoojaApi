@@ -20,5 +20,8 @@ namespace HoojaApi.Models.RelationTables
         public int FK_ProductId { get; set; }
         public Product? Products { get; set; }
         public int Amount { get; set; }
+
+        [NotMapped] // This attribute specifies that the property should not be mapped to the database
+        public decimal TotalPrice { get; set; }
     }
 }

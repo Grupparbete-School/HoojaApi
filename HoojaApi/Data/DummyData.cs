@@ -143,15 +143,78 @@ namespace HoojaApi.Data
                 {
                     var products = new Product[]
                     {
-                    new Product { ProductName = "Shampoo", ProductDescription = "Cleanses and nourishes hair.", Price = 49, QuantityStock = 20, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Conditioner", ProductDescription = "Detangles and softens hair.", Price = 39, QuantityStock = 15, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Hair Serum", ProductDescription = "Adds shine and controls frizz.", Price = 29, QuantityStock = 30, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Hair Mask", ProductDescription = "Deeply conditions and repairs hair.", Price = 59, QuantityStock = 10, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Hair Oil", ProductDescription = "Nourishes and strengthens hair.", Price = 34, QuantityStock = 25, FK_ProductTypeId = 1, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Perfume", ProductDescription = "Elegant fragrance for men and women.", Price = 79, QuantityStock = 8, FK_ProductTypeId = 3, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Makeup Set", ProductDescription = "Complete makeup kit for a flawless look.", Price = 149, QuantityStock = 5, FK_ProductTypeId = 4, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Moisturizer", ProductDescription = "Hydrates and nourishes the skin.", Price = 39, QuantityStock = 12, FK_ProductTypeId = 5, FK_CampaignCodeId = null },
-                    new Product { ProductName = "Facial Cleanser", ProductDescription = "Gently removes impurities from the skin.", Price = 29, QuantityStock = 18, FK_ProductTypeId = 5, FK_CampaignCodeId = null }
+                    new Product {
+                        ProductName = "Shampoo",
+                        ProductDescription = "Cleanses and nourishes hair.",
+                        Price = 49, QuantityStock = 20,
+                        FK_ProductTypeId = 1,
+                        FK_CampaignCodeId = null,
+                        ProductPicture = "https://images.unsplash.com/photo-1543363363-6dbd3125fb6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+                    },
+                    new Product {
+                        ProductName = "Conditioner",
+                        ProductDescription = "Detangles and softens hair.",
+                        Price = 39, QuantityStock = 15,
+                        FK_ProductTypeId = 1,
+                        FK_CampaignCodeId = null,
+                        ProductPicture = "https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                    },
+                    new Product {
+                        ProductName = "Hair Serum",
+                        ProductDescription = "Adds shine and controls frizz.",
+                        Price = 29, QuantityStock = 30,
+                        FK_ProductTypeId = 1,
+                        FK_CampaignCodeId = null,
+                        ProductPicture = "https://images.unsplash.com/photo-1608571424266-edeb9bbefdec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                    },
+                    new Product {
+                        ProductName = "Hair Mask",
+                        ProductDescription = "Deeply conditions and repairs hair.",
+                        Price = 59, QuantityStock = 10,
+                        FK_ProductTypeId = 1,
+                        FK_CampaignCodeId = null,
+                        ProductPicture = "https://images.unsplash.com/photo-1588514899099-e2df6951dde6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
+                    },
+                    new Product {
+                        ProductName = "Hair Oil",
+                        ProductDescription = "Nourishes and strengthens hair.",
+                        Price = 34, QuantityStock = 25,
+                        FK_ProductTypeId = 1,
+                        FK_CampaignCodeId = null,
+                        ProductPicture = "https://images.unsplash.com/photo-1611224596242-2326c5484b57?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                    },
+                    new Product {
+                        ProductName = "Perfume",
+                        ProductDescription = "Elegant fragrance for men and women.",
+                        Price = 79, QuantityStock = 8,
+                        FK_ProductTypeId = 3,
+                        FK_CampaignCodeId = null,
+                        ProductPicture = "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                    },
+                    new Product {
+                        ProductName = "Makeup Set",
+                        ProductDescription = "Complete makeup kit for a flawless look.",
+                        Price = 149, QuantityStock = 5,
+                        FK_ProductTypeId = 4,
+                        FK_CampaignCodeId = null,
+                        ProductPicture = "https://images.unsplash.com/photo-1526045405698-cf8b8acc4aaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+                    },
+                    new Product {
+                        ProductName = "Moisturizer",
+                        ProductDescription = "Hydrates and nourishes the skin.",
+                        Price = 39, QuantityStock = 12,
+                        FK_ProductTypeId = 5,
+                        FK_CampaignCodeId = null,
+                        ProductPicture = "https://images.unsplash.com/photo-1584949514490-73fc1a2faa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                    },
+                    new Product {
+                        ProductName = "Facial Cleanser",
+                        ProductDescription = "Gently removes impurities from the skin.",
+                        Price = 29, QuantityStock = 18,
+                        FK_ProductTypeId = 5,
+                        FK_CampaignCodeId = null,
+                        ProductPicture = "https://images.unsplash.com/photo-1629196869698-2ce173dacc24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                    }
                     };
 
                     context.Products.AddRange(products);

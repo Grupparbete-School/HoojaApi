@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HoojaApi.Migrations
 {
     /// <inheritdoc />
-    public partial class addedCustomerNameReview : Migration
+    public partial class createAzureDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -271,8 +271,9 @@ namespace HoojaApi.Migrations
                     ProductReviewId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Review = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: true),
                     CustomerName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ReviewOfDate = table.Column<DateTime>(type: "date", nullable: false),
                     FK_ProductId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

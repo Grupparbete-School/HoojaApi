@@ -194,7 +194,7 @@ namespace HoojaApi.Migrations
                     b.Property<int?>("FK_ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rating")
+                    b.Property<int?>("Rating")
                         .HasColumnType("int");
 
                     b.Property<string>("Review")

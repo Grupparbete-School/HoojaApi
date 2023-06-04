@@ -23,7 +23,7 @@ namespace HoojaApi.Controllers
         [HttpGet("GetAllProduct")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProcuct()
         {
            var products = await _context.Products.ToListAsync();

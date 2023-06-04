@@ -11,6 +11,7 @@ namespace HoojaApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Range(2000, 10)]
         public int ProductId { get; set; }
+        public string? Brand { get; set; }
 
         [Required]
         [StringLength(50)]

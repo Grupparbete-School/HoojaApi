@@ -24,12 +24,14 @@ namespace HoojaApi.Models
 
         [Required]
         [DisplayName("Price")]
+        [MaxLength(10)]
         public int Price { get; set; }
 
         [DisplayName("Qty in stock")]
         public int QuantityStock { get; set; }
 
         //ändrade från byte[] till string.
+        [StringLength(300)]
         public string? ProductPicture { get; set; }
 
         //Relations

@@ -144,6 +144,7 @@ namespace HoojaApi.Data
                     var products = new Product[]
                     {
                     new Product {
+                        Brand = "Head & Shoulders",
                         ProductName = "Shampoo",
                         ProductDescription = "Cleanses and nourishes hair.",
                         Price = 49, QuantityStock = 20,
@@ -152,6 +153,7 @@ namespace HoojaApi.Data
                         ProductPicture = "https://images.unsplash.com/photo-1543363363-6dbd3125fb6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
                     },
                     new Product {
+                        Brand = "Tresemmé",
                         ProductName = "Conditioner",
                         ProductDescription = "Detangles and softens hair.",
                         Price = 39, QuantityStock = 15,
@@ -160,6 +162,7 @@ namespace HoojaApi.Data
                         ProductPicture = "https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
                     },
                     new Product {
+                        Brand = "Björk Tämja",
                         ProductName = "Hair Serum",
                         ProductDescription = "Adds shine and controls frizz.",
                         Price = 29, QuantityStock = 30,
@@ -168,6 +171,7 @@ namespace HoojaApi.Data
                         ProductPicture = "https://images.unsplash.com/photo-1608571424266-edeb9bbefdec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                     },
                     new Product {
+                        Brand = "Verb",
                         ProductName = "Hair Mask",
                         ProductDescription = "Deeply conditions and repairs hair.",
                         Price = 59, QuantityStock = 10,
@@ -175,7 +179,7 @@ namespace HoojaApi.Data
                         FK_CampaignCodeId = null,
                         ProductPicture = "https://images.unsplash.com/photo-1588514899099-e2df6951dde6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
                     },
-                    new Product {
+                    new Product {Brand = "Mielle Rosemary",
                         ProductName = "Hair Oil",
                         ProductDescription = "Nourishes and strengthens hair.",
                         Price = 34, QuantityStock = 25,
@@ -184,6 +188,7 @@ namespace HoojaApi.Data
                         ProductPicture = "https://images.unsplash.com/photo-1611224596242-2326c5484b57?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                     },
                     new Product {
+                        Brand ="Carolina Herrera",
                         ProductName = "Perfume",
                         ProductDescription = "Elegant fragrance for men and women.",
                         Price = 79, QuantityStock = 8,
@@ -192,6 +197,7 @@ namespace HoojaApi.Data
                         ProductPicture = "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                     },
                     new Product {
+                        Brand ="Grande Csometics",
                         ProductName = "Makeup Set",
                         ProductDescription = "Complete makeup kit for a flawless look.",
                         Price = 149, QuantityStock = 5,
@@ -200,6 +206,7 @@ namespace HoojaApi.Data
                         ProductPicture = "https://images.unsplash.com/photo-1526045405698-cf8b8acc4aaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
                     },
                     new Product {
+                        Brand = "Olay",
                         ProductName = "Moisturizer",
                         ProductDescription = "Hydrates and nourishes the skin.",
                         Price = 39, QuantityStock = 12,
@@ -208,6 +215,7 @@ namespace HoojaApi.Data
                         ProductPicture = "https://images.unsplash.com/photo-1584949514490-73fc1a2faa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                     },
                     new Product {
+                        Brand = "Kale",
                         ProductName = "Facial Cleanser",
                         ProductDescription = "Gently removes impurities from the skin.",
                         Price = 29, QuantityStock = 18,

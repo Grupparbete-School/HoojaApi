@@ -50,6 +50,7 @@ namespace HoojaApi.Controllers
         {
             var product = new Product
             {
+                Brand = newProduct.Brand,
                 ProductName = newProduct.ProductName,
                 ProductDescription = newProduct.ProductDescription,
                 Price = newProduct.Price,
@@ -80,7 +81,7 @@ namespace HoojaApi.Controllers
             {
                 return NotFound();
             }
-
+            existingProduct.Brand = product.Brand;
             existingProduct.ProductName = product.ProductName;
             existingProduct.ProductDescription = product.ProductDescription;
             existingProduct.Price = product.Price;

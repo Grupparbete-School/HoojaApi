@@ -15,6 +15,7 @@ namespace HoojaApi.Models.DTO.OrderHistoryDto
 
         //Produkt
         public int ProductId { get; set; }
+        public string? Brand { get; set; }
         public string? ProductName { get; set; }
         public string? ProductDescription { get; set; }
         public int? Price {get; set; }

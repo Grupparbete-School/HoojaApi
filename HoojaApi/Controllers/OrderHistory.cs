@@ -5,12 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using HoojaApi.Models;
 using HoojaApi.Models.RelationTables;
 using HoojaApi.Models.DTO.OrderHistoryDto;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HoojaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(IgnoreApi = true)] //Gömmer apiEndpoint från swagger
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OrderHistoryController : Controller
     {
         private readonly HoojaApiDbContext _context;

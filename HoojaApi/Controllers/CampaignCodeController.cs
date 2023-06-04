@@ -1,12 +1,16 @@
 ﻿using HoojaApi.Data;
 using HoojaApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace HoojaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public class CampaignCodeController : Controller
     {
         private readonly HoojaApiDbContext _context;
@@ -20,6 +24,8 @@ namespace HoojaApi.Controllers
         [HttpGet("GetAllCampaignCode")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [AllowAnonymous]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<ActionResult<IEnumerable<CampaignCode>>> GetAllCampaignCode()
         {
             var campaignCodes = await _context.CampaignCodes.ToListAsync();
@@ -28,6 +34,8 @@ namespace HoojaApi.Controllers
 
         // GET api/<CampaignCodeController>/5
         [HttpGet("CampaignCode-By{id}")]
+        [AllowAnonymous]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<ActionResult<IEnumerable<CampaignCode>>> GetAllCampaignCode(int id)
         {
             var campaignCodes = await _context.CampaignCodes.FindAsync(id);

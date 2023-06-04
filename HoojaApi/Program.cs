@@ -18,18 +18,18 @@ namespace HoojaApi
 
             //Add services to the container.
             //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            // builder.Services.AddDbContext<HoojaApiDbContext>(options =>
-            //     options.UseSqlServer(connectionString));
+            //builder.Services.AddDbContext<HoojaApiDbContext>(options =>
+            //    options.UseSqlServer(connectionString));
 
             //loading the .env file
             DotNetEnv.Env.Load();
 
             // Retrieve the connection string from the environment variable
-            var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+            var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING_AZURE");
 
             if (string.IsNullOrEmpty(connectionString))
             {
-                throw new InvalidOperationException("Connection string 'CONNECTION_STRING' not found.");
+                throw new InvalidOperationException("Connection string 'CONNECTION_STRING_AZURE' not found.");
             }
 
             builder.Services.AddDbContext<HoojaApiDbContext>(options =>
@@ -78,11 +78,14 @@ namespace HoojaApi
             //}
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    app.UseSwagger();
+            //    app.UseSwaggerUI();
+            //}
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
             // Add error handling middleware.
@@ -93,9 +96,12 @@ namespace HoojaApi
 
             app.UseAuthorization();
 
-            app.MapControllers(); //viktig f�r att mappning ska fungera
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
-  
+
             app.Run();
         }
     }

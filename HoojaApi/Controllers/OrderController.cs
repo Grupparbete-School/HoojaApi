@@ -70,18 +70,18 @@ namespace HoojaApi.Controllers
 
                 var newAddressId = newAddress.AddressId;
 
-                var newCustomer = new User
-                {
-                    FirstName = createOrder.FirstName,
-                    LastName = createOrder.LastName,
-                    Email = createOrder.Email,
-                    FK_AddressId = newAddressId,
-                };
+                //var newCustomer = new User
+                //{
+                //    FirstName = createOrder.FirstName,
+                //    LastName = createOrder.LastName,
+                //    Email = createOrder.Email,
+                //    FK_AddressId = newAddressId,
+                //};
 
-                _context.Users.Add(newCustomer);
-                await _context.SaveChangesAsync();
+                //_context.Users.Add(newCustomer);
+                //await _context.SaveChangesAsync();
 
-                int newCustomerId = newCustomer.Id;
+                int newCustomerId = (int)createOrder.userId;
 
                 var newOrder = new Order
                 {

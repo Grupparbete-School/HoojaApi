@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HoojaApi.Migrations
 {
     /// <inheritdoc />
-    public partial class createAzureDb : Migration
+    public partial class initDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -133,11 +133,12 @@ namespace HoojaApi.Migrations
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ProductDescription = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Price = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<int>(type: "int", maxLength: 10, nullable: false),
                     QuantityStock = table.Column<int>(type: "int", nullable: false),
-                    ProductPicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductPicture = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     FK_ProductTypeId = table.Column<int>(type: "int", nullable: false),
                     FK_CampaignCodeId = table.Column<int>(type: "int", nullable: true)
                 },

@@ -1,13 +1,17 @@
 ﻿using HoojaApi.Data;
 using HoojaApi.Models;
 using HoojaApi.Models.RelationTables;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace HoojaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public class AddressController : Controller
     {
         private readonly HoojaApiDbContext _context;

@@ -1,8 +1,11 @@
 ﻿using HoojaApi.Data;
 using HoojaApi.Models.DTO.ProductReviewDto;
 using HoojaApi.Models.RelationTables;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,6 +13,7 @@ namespace HoojaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ProductReviewController : ControllerBase
     {
         private readonly HoojaApiDbContext _context;

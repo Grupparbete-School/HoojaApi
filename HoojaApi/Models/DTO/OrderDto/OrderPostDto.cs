@@ -23,5 +23,6 @@ namespace HoojaApi.Models.DTO.OrderDto
         public string PostalCode { get; set; }
         [Required]
         public string City { get; set; }
+        public int? userId { get; set; }
     }
 }

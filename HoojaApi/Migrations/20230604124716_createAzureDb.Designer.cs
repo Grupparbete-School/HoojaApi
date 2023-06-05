@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoojaApi.Migrations
 {
     [DbContext(typeof(HoojaApiDbContext))]
-    [Migration("20230601193402_changedDatepropReview")]
-    partial class changedDatepropReview
+    [Migration("20230604124716_createAzureDb")]
+    partial class createAzureDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,7 +197,7 @@ namespace HoojaApi.Migrations
                     b.Property<int?>("FK_ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rating")
+                    b.Property<int?>("Rating")
                         .HasColumnType("int");
 
                     b.Property<string>("Review")

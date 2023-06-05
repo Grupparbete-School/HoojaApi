@@ -18,8 +18,8 @@ namespace HoojaApi
 
             //Add services to the container.
             //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            // builder.Services.AddDbContext<HoojaApiDbContext>(options =>
-            //     options.UseSqlServer(connectionString));
+            //builder.Services.AddDbContext<HoojaApiDbContext>(options =>
+            //    options.UseSqlServer(connectionString));
 
             //loading the .env file
             DotNetEnv.Env.Load();
@@ -78,11 +78,14 @@ namespace HoojaApi
             //}
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    app.UseSwagger();
+            //    app.UseSwaggerUI();
+            //}
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
             // Add error handling middleware.
@@ -93,9 +96,12 @@ namespace HoojaApi
 
             app.UseAuthorization();
 
-            app.MapControllers(); //viktig f�r att mappning ska fungera
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
-  
+
             app.Run();
         }
     }

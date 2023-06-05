@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HoojaApi.Models.DTO.OrderHistoryDto
 {
@@ -14,11 +15,13 @@ namespace HoojaApi.Models.DTO.OrderHistoryDto
 
         //Produkt
         public int ProductId { get; set; }
+        public string? Brand { get; set; }
         public string? ProductName { get; set; }
         public string? ProductDescription { get; set; }
         public int? Price {get; set; }
         public int? QuantityStock { get; set; }
         public int? Amount { get; set; }
+        public decimal? TotalPrice { get; set; }
 
         //Produkt grupp
         public int? ProductTypeId { get; set; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoojaApi.Migrations
 {
     [DbContext(typeof(HoojaApiDbContext))]
-    [Migration("20230601192410_addedDateToREview")]
-    partial class addedDateToREview
+    [Migration("20230604194207_addedBrand")]
+    partial class addedBrand
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,9 @@ namespace HoojaApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("FK_CampaignCodeId")
                         .HasColumnType("int");
 
@@ -95,6 +98,7 @@ namespace HoojaApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Price")
+                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     b.Property<string>("ProductDescription")
@@ -108,7 +112,8 @@ namespace HoojaApi.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ProductPicture")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<int>("QuantityStock")
                         .HasColumnType("int");
@@ -197,7 +202,7 @@ namespace HoojaApi.Migrations
                     b.Property<int?>("FK_ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rating")
+                    b.Property<int?>("Rating")
                         .HasColumnType("int");
 
                     b.Property<string>("Review")
@@ -205,7 +210,7 @@ namespace HoojaApi.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<DateTime>("ReviewOfDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("ProductReviewId");
 

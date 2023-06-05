@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoojaApi.Migrations
 {
     [DbContext(typeof(HoojaApiDbContext))]
-    [Migration("20230601191000_addedCustomerNameReview")]
-    partial class addedCustomerNameReview
+    [Migration("20230601065215_SyncAnPull")]
+    partial class SyncAnPull
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,14 +190,7 @@ namespace HoojaApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductReviewId"));
 
-                    b.Property<string>("CustomerName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<int?>("FK_ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.Property<string>("Review")

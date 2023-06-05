@@ -5,12 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using HoojaApi.Models;
 using HoojaApi.Models.RelationTables;
 using HoojaApi.Models.DTO.OrderHistoryDto;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HoojaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(IgnoreApi = true)] //Gömmer apiEndpoint från swagger
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OrderHistoryController : Controller
     {
         private readonly HoojaApiDbContext _context;
@@ -38,11 +41,13 @@ namespace HoojaApi.Controllers
                     OrderDate = o.Orders.OrderDate,
                     DeliveryDate = o.Orders.DeliveryDate,
                     ProductId = o.Products.ProductId,
+                    Brand = o.Products.Brand,
                     ProductName = o.Products.ProductName,
                     ProductDescription = o.Products.ProductDescription,
                     Price = o.Products.Price,
                     QuantityStock = o.Products.QuantityStock,
                     Amount = o.Amount,
+                    TotalPrice = o.TotalPrice,
                     ProductTypeId = o.Products.ProductTypes.ProductTypeId,
                     ProductTypeName = o.Products.ProductTypes.ProductTypeName,
                     CampaignCodeId = (int)o.Products.CampaignCodes.CampaignCodeId,
@@ -82,10 +87,12 @@ namespace HoojaApi.Controllers
                     OrderDate = o.Orders.OrderDate,
                     DeliveryDate = o.Orders.DeliveryDate,
                     ProductId = o.Products.ProductId,
+                    Brand = o.Products.Brand,
                     ProductName = o.Products.ProductName,
                     ProductDescription = o.Products.ProductDescription,
                     Price = o.Products.Price,
                     Amount = o.Amount,
+                    TotalPrice = o.TotalPrice,
                     QuantityStock = o.Products.QuantityStock,
                     ProductTypeId = o.Products.ProductTypes.ProductTypeId,
                     ProductTypeName = o.Products.ProductTypes.ProductTypeName,

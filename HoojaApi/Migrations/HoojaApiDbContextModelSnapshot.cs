@@ -85,6 +85,9 @@ namespace HoojaApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("FK_CampaignCodeId")
                         .HasColumnType("int");
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoojaApi.Migrations
 {
     [DbContext(typeof(HoojaApiDbContext))]
-    [Migration("20230605065452_MaddeTest22")]
-    partial class MaddeTest22
+    [Migration("20230605113926_initDb")]
+    partial class initDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,6 +87,9 @@ namespace HoojaApi.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("FK_CampaignCodeId")
                         .HasColumnType("int");

@@ -13,7 +13,7 @@ namespace HoojaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ProductReviewController : ControllerBase
     {
         private readonly HoojaApiDbContext _context;
@@ -171,6 +171,7 @@ namespace HoojaApi.Controllers
         //Update använder sig av ReviewId vid sökning vilken review som ska uppdateras,
         //det för annars går det inte uppdatera specifik review 
         //när det finns flera review med samma produkt.
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         [HttpPut("UpdateProductReview/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)] // Optional: Specifies the success response type
         [ProducesResponseType(StatusCodes.Status400BadRequest)] // Optional: Specifies the bad request response type
@@ -211,6 +212,7 @@ namespace HoojaApi.Controllers
 
 
         // DELETE api/<ProductReviewController>/5
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         [HttpDelete("DeleteProductReview/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

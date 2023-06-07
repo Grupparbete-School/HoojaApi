@@ -49,17 +49,17 @@
           "contentVersion": "1.0.0.0",
           "resources": [
             {
-              "name": "HoojaApiapi",
+              "name": "HoojaApiManage",
               "type": "Microsoft.ApiManagement/service",
               "location": "[parameters('resourceLocation')]",
               "properties": {
                 "publisherEmail": "ullzten@gmail.com",
-                "publisherName": "Oskar Ullsten",
+                "publisherName": "Hooja Group",
                 "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
                 "hostnameConfigurations": [
                   {
                     "type": "Proxy",
-                    "hostName": "hoojaapiapi.azure-api.net",
+                    "hostName": "hoojaapimanage.azure-api.net",
                     "encodedCertificate": null,
                     "keyVaultId": null,
                     "certificatePassword": null,
@@ -95,7 +95,7 @@
             },
             {
               "type": "Microsoft.ApiManagement/service/apis",
-              "name": "HoojaApiapi/HoojaApi",
+              "name": "HoojaApiManage/HoojaApi",
               "properties": {
                 "displayName": "HoojaApi",
                 "apiRevision": "1",
@@ -118,7 +118,7 @@
               },
               "apiVersion": "2019-12-01",
               "dependsOn": [
-                "HoojaApiapi"
+                "HoojaApiManage"
               ]
             }
           ]

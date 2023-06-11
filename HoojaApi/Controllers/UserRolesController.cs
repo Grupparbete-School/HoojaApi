@@ -46,6 +46,23 @@ namespace HoojaApi.Controllers
             return new List<string>(await _userManager.GetRolesAsync(user));
         }
 
+        [HttpGet]
+        [Route("api/roles")]
+        public async Task<IActionResult> GetAllRoles()
+        {
+            try
+            {
+                // Retrieve all the roles from the role manager
+                var roles = await _roleManager.Roles.Select(r => r.Name).ToListAsync();
+
+                return Ok(roles);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
 
         [HttpGet]
         [Route("api/userRoles/{userId}")]

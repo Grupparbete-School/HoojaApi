@@ -26,7 +26,7 @@ namespace HoojaApi.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<ActionResult> Login(LoginDto loginDto)
         {
             if (!ModelState.IsValid)
